@@ -8,3 +8,4 @@ conan/
 prefix/
 CMakeLists.txt.user
 CMakeUserPresets.json
+*.swp
