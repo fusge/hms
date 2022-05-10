@@ -12,39 +12,10 @@ project(
 
 include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
+set(CMAKE_CXX_STANDARD_20)
+set(CMAKE_CXX_STANDARD_REQUIRED)
 
-# ---- Declare library ----
-
-add_library(
-    hms_lib OBJECT
-    source/lib.cpp
-)
-
-target_include_directories(
-    hms_lib ${warning_guard}
-    PUBLIC
-    "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source>"
-)
-
-target_compile_features(hms_lib PUBLIC cxx_std_17)
-
-find_package(fmt REQUIRED)
-target_link_libraries(hms_lib PRIVATE fmt::fmt)
-
-# ---- Declare executable ----
-
-add_executable(hms_exe source/main.cpp)
-add_executable(hms::exe ALIAS hms_exe)
-
-set_target_properties(
-    hms_exe PROPERTIES
-    OUTPUT_NAME hms
-    EXPORT_NAME exe
-)
-
-target_compile_features(hms_exe PRIVATE cxx_std_17)
-
-target_link_libraries(hms_exe PRIVATE hms_lib)
+add_subdirectory(source)
 
 # ---- Install rules ----
 
