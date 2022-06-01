@@ -3,9 +3,15 @@
 
 #include "system.hpp"
 
-HMS::System::System() {}
+HMS::System::System()
+{
+  this->startup();
+}
 
-HMS::System::~System() {}
+HMS::System::~System()
+{
+  this->shutdown();
+}
 
 int HMS::System::startup()
 {
@@ -33,7 +39,7 @@ int HMS::System::check_subsystem_status(subsystem_t subsystem,
 }
 
 int HMS::System::check_all_subsystems_status(
-    std::array<subssytem_status*, PLUGIN>* status_list)
+    std::array<HMS::subsystem_status, LOGGER>* status_list)
 {
   std::cout << "Checking all subsystems...\n";
   return 0;

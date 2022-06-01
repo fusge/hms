@@ -4,22 +4,27 @@
 
 project(hmsTests LANGUAGES CXX)
 
+include(CTest)
 # ---- Dependencies ----
 
-find_package(Catch2 REQUIRED)
-include(Catch)
+find_package(GTest REQUIRED)
+# include(Catch)
 
 # ---- Tests ----
 
-add_executable(hms_test source/hms_test.cpp)
+add_executable(hms_test 
+  source/system_tests.cpp
+  source/system_tests.hpp
+)
 target_link_libraries(
     hms_test PRIVATE
     hms_lib
-    Catch2::Catch2WithMain
+    GTest::gtest GTest::gtest_main
 )
-target_compile_features(hms_test PRIVATE cxx_std_17)
+target_compile_features(hms_test PRIVATE cxx_std_20)
 
-catch_discover_tests(hms_test)
+add_test(NAME hms_test COMMAND hms_test)
+#catch_discover_tests(hms_test)
 
 # ---- End-of-file commands ----
 

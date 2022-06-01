@@ -1,0 +1,33 @@
+HMS: Home Management System
+
+--Use Case
+The home management system controls all IoT devices at the user's home.
+
+--Triggers
+1.A voice/terminal/gesture command to perform an action
+2.Timed events
+3.External triggers
+
+--Actors
+1.The home owner
+2.devices
+3.network
+4.hms
+
+--preconditions
+1.IoT devices
+2.network
+
+--Goals
+schedule and perform tasks automatically
+
+--Not Available
+Extension system (modules/plugins)
+
+--Steps of execution
+1.The home owner gives a command to hms
+2.HMS detects the command and interprets the command
+3.HMS performs the command on the objects and sends it over the network
+4.the device receives the command and performs the action
+5.HMS confirms status of completion for action
+

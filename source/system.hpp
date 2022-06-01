@@ -10,7 +10,8 @@ enum subsystem_t
   TASK,
   EVENT,
   NETWORK,
-  PLUGIN
+  PLUGIN,
+  LOGGER
 };
 
 enum status_t
@@ -22,20 +23,20 @@ enum status_t
 
 struct subsystem_status
 {
-  std::string* name;
+  std::string system_name;
   int subsystem_id;
   subsystem_t subsystem_type;
   status_t status;
-  std::string* msg;
+  std::string msg;
 };
 
 class Subsystem
 {
 public:
-  virtual int startup();
-  virtual int shutdown();
-  virtual int restart();
-  virtual int check_status(subsystem_status* status);
+  virtual int startup()=0;
+  virtual int shutdown()=0;
+  virtual int restart()=0;
+  virtual int check_status(subsystem_status* status)=0;
 };
 
 class System
@@ -49,12 +50,12 @@ public:
   int restart_subsystem(int subsystem_id);
   int check_subsystem_status(subsystem_t subsystem, subsystem_status* status);
   int check_all_subsystems_status(
-      std::array<subsystem_status*, PLUGIN>* status_list);
+      std::array<subsystem_status, LOGGER>* status_list);
 
 private:
   std::string owner_name;
   std::string home_address;
-  std::array<Subsystem*, PLUGIN> subsystems;
+  std::array<Subsystem*, LOGGER> subsystems;
 };
 
 }  // namespace HMS

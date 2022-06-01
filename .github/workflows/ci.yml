@@ -38,7 +38,8 @@ jobs:
     # edit the "<name>" placeholder to your GitHub name.
     # If you do not wish to use codecov, then simply delete this job from the
     # workflow.
-    if: github.repository_owner == 'fusge'
+    if: github.repository_owner == '<name>'
+      && false
 
     steps:
     - uses: actions/checkout@v2
@@ -52,10 +53,10 @@ jobs:
       with: { python-version: "3.8" }
 
     - name: Install dependencies
-      run: pip3 install conan
+      run: pip3 install "conan<2"
         && conan profile new default --detect
         && conan profile update settings.compiler.libcxx=libstdc++11 default
-        && conan install . -if conan -b missing
+        && conan install . -b missing
 
     - name: Configure
       run: cmake --preset=ci-coverage
@@ -88,10 +89,10 @@ jobs:
       with: { python-version: "3.8" }
 
     - name: Install dependencies
-      run: pip3 install conan
+      run: pip3 install "conan<2"
         && conan profile new default --detect
         && cp .github/clang-12.profile ~/.conan/profiles/default
-        && conan install . -if conan -b missing
+        && conan install . -b missing
 
     - name: Configure
       env: { CXX: clang++-12 }
@@ -134,12 +135,12 @@ jobs:
     - name: Install dependencies
       shell: bash
       run: |
-        pip3 install conan
+        pip3 install "conan<2"
         conan profile new default --detect
         if [ ${{ matrix.os }} = ubuntu-latest ]; then
           conan profile update settings.compiler.libcxx=libstdc++11 default
         fi
-        conan install . -if conan -b missing
+        conan install . -b missing
 
     - name: Configure
       shell: pwsh
