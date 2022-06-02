@@ -13,6 +13,7 @@ project(
 include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
 
+configure_file(source/hmsConfig.hpp.in source/hmsConfig.hpp)
 # ---- Declare library ----
 
 add_library(
@@ -45,6 +46,8 @@ set_target_properties(
 target_compile_features(hms_exe PRIVATE cxx_std_20)
 
 target_link_libraries(hms_exe PRIVATE hms_lib)
+
+include_directories(${PROJECT_BINARY_DIR}/source)
 
 # ---- Install rules ----
 
