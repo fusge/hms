@@ -3,44 +3,50 @@
 
 #include "system.hpp"
 
-HMS::System::System()
+hms::system::system()
 {
   this->startup();
 }
 
-HMS::System::~System()
+hms::system::~system()
 {
   this->shutdown();
 }
 
-int HMS::System::startup()
+auto hms::system::startup() -> int
 {
   std::cout << "Initializing subsystems...\n";
   return 0;
 }
 
-int HMS::System::shutdown()
+auto hms::system::shutdown() -> int
 {
   std::cout << "Shutting down subsystems...\n";
   return 0;
 }
 
-int HMS::System::restart_subsystem(int subsystem_id)
+auto hms::system::restart_subsystem(int subsystem_id) -> int
 {
   std::cout << "Restarting Subsystem " << subsystem_id << "\n";
   return 0;
 }
 
-int HMS::System::check_subsystem_status(subsystem_t subsystem,
-                                        subsystem_status* status)
+auto hms::system::check_subsystem_status(subsystem_t subsystem,
+                                         subsystem_status* status) -> int
 {
   std::cout << "Querying subsystem status...\n";
   return 0;
 }
 
-int HMS::System::check_all_subsystems_status(
-    std::array<HMS::subsystem_status, LOGGER>* status_list)
+auto hms::system::check_all_subsystems_status(
+    std::array<hms::subsystem_status, hms::logger_t>* status_list) -> int
 {
   std::cout << "Checking all subsystems...\n";
+  return 0;
+}
+
+auto hms::subsystem_factory::init_subsystem(hms::subsystem_t system_type,
+                                            hms::subsystem * sub_system) -> int
+{
   return 0;
 }

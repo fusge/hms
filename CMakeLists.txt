@@ -17,7 +17,7 @@ include(cmake/variables.cmake)
 
 add_library(
     hms_lib OBJECT
-    source/lib.cpp
+    source/system.hpp source/system.cpp
 )
 
 target_include_directories(

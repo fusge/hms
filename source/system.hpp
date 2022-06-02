@@ -2,23 +2,23 @@
 #include <array>
 #include <string>
 
-namespace HMS
+namespace hms
 {
 enum subsystem_t
 {
-  DEVICE = 0,
-  TASK,
-  EVENT,
-  NETWORK,
-  PLUGIN,
-  LOGGER
+  device_t = 0,
+  task_t,
+  event_t,
+  network_t,
+  plugin_t,
+  logger_t
 };
 
 enum status_t
 {
-  RUNNING,
-  STOPPED,
-  UNKNOWN
+  running,
+  stopped,
+  unknown
 };
 
 struct subsystem_status
@@ -30,32 +30,40 @@ struct subsystem_status
   std::string msg;
 };
 
-class Subsystem
+class subsystem
 {
 public:
-  virtual int startup()=0;
-  virtual int shutdown()=0;
-  virtual int restart()=0;
-  virtual int check_status(subsystem_status* status)=0;
+  virtual auto startup() -> int = 0;
+  virtual auto shutdown() -> int = 0;
+  virtual auto restart() -> int = 0;
+  virtual auto check_status(subsystem_status* status) -> int = 0;
 };
 
-class System
+class subsystem_factory
 {
 public:
-  System();
-  ~System();
+  auto init_subsystem(hms::subsystem_t system_type,
+                      hms::subsystem * sub_system) -> int;
+};
 
-  int startup();
-  int shutdown();
-  int restart_subsystem(int subsystem_id);
-  int check_subsystem_status(subsystem_t subsystem, subsystem_status* status);
-  int check_all_subsystems_status(
-      std::array<subsystem_status, LOGGER>* status_list);
+class system
+{
+public:
+  system();
+  ~system();
+
+  auto startup() -> int;
+  auto shutdown() -> int;
+  auto restart_subsystem(int subsystem_id) -> int;
+  auto check_subsystem_status(subsystem_t subsystem, subsystem_status* status)
+      -> int;
+  auto check_all_subsystems_status(
+      std::array<subsystem_status, logger_t>* status_list) -> int;
 
 private:
-  std::string owner_name;
-  std::string home_address;
-  std::array<Subsystem*, LOGGER> subsystems;
+  std::string m_owner_name;
+  std::string m_home_address;
+  std::array<subsystem*, hms::logger_t> m_subsystems;
 };
 
-}  // namespace HMS
+}  // namespace hms

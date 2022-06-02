@@ -7,9 +7,9 @@
 
 class systemTests : public ::testing::Test
 {
-  protected:
-  systemTests() { };
-  ~systemTests() { };
+protected:
+  systemTests() {};
+  ~systemTests() {};
 };
 
 #endif
