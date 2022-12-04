@@ -1,6 +1,7 @@
 # ---- Dependencies ----
 
 include(FetchContent)
+cmake_policy(SET CMP0135 NEW)
 FetchContent_Declare(
     mcss URL
     https://github.com/friendlyanon/m.css/releases/download/release-1/mcss.zip
