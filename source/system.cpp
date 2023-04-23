@@ -13,40 +13,39 @@ hms::system::~system()
   this->shutdown();
 }
 
-auto hms::system::startup() -> int
+int hms::system::startup()
 {
   std::cout << "Initializing subsystems...\n";
   return 0;
 }
 
-auto hms::system::shutdown() -> int
+int hms::system::shutdown()
 {
   std::cout << "Shutting down subsystems...\n";
   return 0;
 }
 
-auto hms::system::restart_subsystem(int subsystem_id) -> int
+int hms::system::restart_subsystem(int subsystem_id)
 {
   std::cout << "Restarting Subsystem " << subsystem_id << "\n";
   return 0;
 }
 
-auto hms::system::check_subsystem_status(subsystem_t subsystem,
-                                         subsystem_status* status) -> int
+int hms::system::check_subsystem_status(subsystem_t subsystem,
+                                         subsystem_status status)
 {
   std::cout << "Querying subsystem status...\n";
   return 0;
 }
 
-auto hms::system::check_all_subsystems_status(
-    std::array<hms::subsystem_status, hms::logger_t>* status_list) -> int
+int hms::system::check_all_subsystems_status(const std::vector<hms::subsystem_status>& status_list)
 {
   std::cout << "Checking all subsystems...\n";
   return 0;
 }
 
-auto hms::subsystem_factory::init_subsystem(hms::subsystem_t system_type,
-                                            hms::subsystem * sub_system) -> int
+int hms::subsystem_factory::init_subsystem(hms::subsystem_t system_type,
+                                            hms::subsystem * sub_system)
 {
   return 0;
 }

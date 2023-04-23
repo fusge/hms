@@ -1,5 +1,5 @@
 
-#include <array>
+#include <vector>
 #include <string>
 
 namespace hms
@@ -11,7 +11,8 @@ enum subsystem_t
   event_t,
   network_t,
   plugin_t,
-  logger_t
+  logger_t,
+  unknown_t
 };
 
 enum status_t
@@ -33,37 +34,45 @@ struct subsystem_status
 class subsystem
 {
 public:
-  virtual auto startup() -> int = 0;
-  virtual auto shutdown() -> int = 0;
-  virtual auto restart() -> int = 0;
-  virtual auto check_status(subsystem_status* status) -> int = 0;
+  subsystem(const subsystem&) = delete;
+  subsystem& operator=(const subsystem&) = delete;
+  subsystem(subsystem&&) = delete;
+  subsystem& operator=(subsystem&&) = delete;
+  virtual ~subsystem() = default;
+
+  virtual int startup() = 0;
+  virtual int shutdown() = 0;
+  virtual int restart() = 0;
+  virtual int check_status(subsystem_status* status) = 0;
 };
 
 class subsystem_factory
 {
 public:
-  auto init_subsystem(hms::subsystem_t system_type,
-                      hms::subsystem * sub_system) -> int;
+  int init_subsystem(hms::subsystem_t system_type,
+                     hms::subsystem * sub_system);
 };
 
 class system
 {
 public:
   system();
+  system(const system&) = delete;
+  system& operator=(const system&) = delete;
+  system(system&&) = delete;
+  system& operator=(system&&) = delete;
   ~system();
 
-  auto startup() -> int;
-  auto shutdown() -> int;
-  auto restart_subsystem(int subsystem_id) -> int;
-  auto check_subsystem_status(subsystem_t subsystem, subsystem_status* status)
-      -> int;
-  auto check_all_subsystems_status(
-      std::array<subsystem_status, logger_t>* status_list) -> int;
+  int startup();
+  int shutdown();
+  int restart_subsystem(int subsystem_id);
+  int check_subsystem_status(subsystem_t subsystem, subsystem_status status);
+  int check_all_subsystems_status(const std::vector<subsystem_status>& status_list);
 
 private:
   std::string m_owner_name;
   std::string m_home_address;
-  std::array<subsystem*, hms::logger_t> m_subsystems;
+  std::vector<subsystem*> m_subsystems;
 };
 
 }  // namespace hms

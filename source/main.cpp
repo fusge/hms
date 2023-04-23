@@ -1,7 +1,9 @@
-#include <iostream>
-#include <string>
+#include <memory>
 
-auto main() -> int
+#include "system.hpp"
+
+int main()
 {
+  auto system = std::make_unique<hms::system>();
   return 0;
 }
