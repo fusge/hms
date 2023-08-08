@@ -8,8 +8,8 @@
 class systemTests : public ::testing::Test
 {
 protected:
-  systemTests() {};
-  ~systemTests() {};
+  systemTests() = default;
+  ~systemTests() override = default;
 };
 
 #endif

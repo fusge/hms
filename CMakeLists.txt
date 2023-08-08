@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.25)
 
 include(cmake/prelude.cmake)
 
@@ -14,26 +14,25 @@ include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
 
 configure_file(source/hmsConfig.hpp.in source/hmsConfig.hpp)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+list(APPEND CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES 
+    ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES}
+)
+
 # ---- Declare library ----
 
 add_library(
-    hms_lib OBJECT
+    hms OBJECT
     source/system.hpp source/system.cpp
 )
 
 target_include_directories(
-    hms_lib ${warning_guard}
+    hms ${warning_guard}
     PUBLIC
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source>"
 )
 
-target_compile_features(hms_lib PUBLIC cxx_std_20)
-
-find_package(fmt REQUIRED)
-target_link_libraries(hms_lib PRIVATE fmt::fmt)
-
 # ---- Declare executable ----
-
 add_executable(hms_exe source/main.cpp)
 add_executable(hms::exe ALIAS hms_exe)
 
@@ -43,9 +42,7 @@ set_target_properties(
     EXPORT_NAME exe
 )
 
-target_compile_features(hms_exe PRIVATE cxx_std_20)
-
-target_link_libraries(hms_exe PRIVATE hms_lib)
+target_link_libraries(hms_exe PRIVATE hms)
 
 include_directories(${PROJECT_BINARY_DIR}/source)
 

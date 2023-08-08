@@ -15,3 +15,6 @@ conan.lock
 graph_info.json
 
 *.swp
+.cache/
+compile_commands.json
+

@@ -1,3 +1,3 @@
-constexpr int HMS_VERSION_MAJOR = @hms_VERSION_MAJOR@;
-constexpr int HMS_VERSION_MINOR = @hms_VERSION_MINOR@;
-constexpr int HMS_VERSION_PATCH = @hms_VERSION_PATCH@;
+constexpr int hms_version_major = @hms_VERSION_MAJOR@;
+constexpr int hms_version_minor = @hms_VERSION_MINOR@;
+constexpr int hms_version_patch = @hms_VERSION_PATCH@;

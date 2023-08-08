@@ -2,11 +2,11 @@
 #include <string>
 #include "hmsConfig.hpp"
 
-auto main() -> int
+int main(int  /*argc*/, char*  /*argv*/[])
 {
   std::cout << "Welcome to HMS version "
-            << HMS_VERSION_MAJOR << "."
-            << HMS_VERSION_MINOR << "."
-            << HMS_VERSION_PATCH << "\n";
+            << hms_version_major << "."
+            << hms_version_minor << "."
+            << hms_version_patch << "\n";
   return 0;
 }

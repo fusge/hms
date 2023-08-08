@@ -18,11 +18,9 @@ add_executable(hms_test
 )
 target_link_libraries(
     hms_test PRIVATE
-    hms_lib
+    hms
     GTest::gtest GTest::gtest_main
 )
-target_compile_features(hms_test PRIVATE cxx_std_20)
-
 add_test(NAME hms_test COMMAND hms_test)
 #catch_discover_tests(hms_test)
 

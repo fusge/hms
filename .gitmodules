@@ -1,3 +1,0 @@
-[submodule "deps/open-zwave"]
-	path = deps/open-zwave
-	url = https://github.com/OpenZWave/open-zwave

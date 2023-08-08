@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <iostream>
 
 #include "network.hpp"
@@ -6,28 +7,28 @@ auto hms::network::manager::startup() -> int
 {
   std::cout << "Network Subsystem Initialized\n";
   this->status = hms::status::running;
-  return 0;
+  return EXIT_SUCCESS;
 }
 
 auto hms::network::manager::shutdown() -> int
 {
   std::cout << "Network Subsystem Shutdown\n";
   this->status = hms::status::stopped;
-  return 0;
+  return EXIT_SUCCESS;
 }
 
 auto hms::network::manager::restart() -> int
 {
-  int result = 0;
+  int result = EXIT_SUCCESS;
   try{
-    this->shutdown();
-    this->startup();
+    if(this->shutdown() == EXIT_FAILURE) { result = EXIT_FAILURE; }
+    if(this->startup() == EXIT_FAILURE) { result = EXIT_FAILURE; }
   } catch (...){
     std::cerr << "Unable to restart Network Manager\n";
     this->status = hms::status::unknown;
-    result = -1;
+    result = EXIT_FAILURE;
   }
-  this->startup();
+  return result;
 }
 
 auto hms::network::manager::check_status() -> hms::status::type

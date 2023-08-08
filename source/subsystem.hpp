@@ -6,7 +6,7 @@
 
 namespace hms
 {
-enum subsystem_t : int
+enum subsystem_t : size_t 
 {
   device_t,
   task_t,
@@ -17,14 +17,14 @@ enum subsystem_t : int
   unknown_t
 };
 
-const std::array<subsystem_t, 7> ALL_SUBSYSTEM_TYPES {device_t, task_t, // NOLINT
+constexpr std::array<subsystem_t, 7> all_subsystem_types {device_t, task_t, // NOLINT
                                                       event_t, network_t, 
                                                       plugin_t, logger_t, 
                                                       unknown_t};
 
 namespace status
 {
-enum type
+enum type_t
 {
   running,
   stopped,
@@ -35,7 +35,7 @@ struct info
 {
   std::string system_name;
   subsystem_t subsystem_type;
-  hms::status::type status;
+  hms::status::type_t status;
   std::string msg;
 };
 }  // namespace status
@@ -43,10 +43,15 @@ struct info
 class subsystem
 {
 public:
+  subsystem(const subsystem&) = default;
+  subsystem(subsystem&&) = delete;
+  subsystem& operator=(const subsystem&) = default;
+  subsystem& operator=(subsystem&&) = delete;
+  virtual ~subsystem() = default;
   virtual auto startup() -> int = 0;
   virtual auto shutdown() -> int = 0;
   virtual auto restart() -> int = 0;
-  virtual auto check_status() -> hms::status::type = 0;
+  virtual auto check_status() -> hms::status::type_t = 0;
   virtual auto get_status_info() -> hms::status::info = 0;
   virtual auto get_subsystem_type() -> hms::subsystem_t = 0;
 };
