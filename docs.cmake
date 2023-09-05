@@ -1,18 +1,13 @@
 # ---- Dependencies ----
 
-set(extract_timestamps "")
-if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.24")
-  set(extract_timestamps DOWNLOAD_EXTRACT_TIMESTAMP YES)
-endif()
-
 include(FetchContent)
+cmake_policy(SET CMP0135 NEW)
 FetchContent_Declare(
     mcss URL
     https://github.com/friendlyanon/m.css/releases/download/release-1/mcss.zip
     URL_MD5 00cd2757ebafb9bcba7f5d399b3bec7f
     SOURCE_DIR "${PROJECT_BINARY_DIR}/mcss"
     UPDATE_DISCONNECTED YES
-    ${extract_timestamps}
 )
 FetchContent_MakeAvailable(mcss)
 

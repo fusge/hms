@@ -8,7 +8,6 @@ include(CTest)
 # ---- Dependencies ----
 
 find_package(GTest REQUIRED)
-# include(Catch)
 
 # ---- Tests ----
 
@@ -18,11 +17,10 @@ add_executable(hms_test
 )
 target_link_libraries(
     hms_test PRIVATE
-    hms
+    hms_lib
     GTest::gtest GTest::gtest_main
 )
 add_test(NAME hms_test COMMAND hms_test)
-#catch_discover_tests(hms_test)
 
 # ---- End-of-file commands ----
 

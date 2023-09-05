@@ -22,15 +22,18 @@ list(APPEND CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES
 # ---- Declare library ----
 
 add_library(
-    hms OBJECT
+    hms_lib OBJECT
     source/system.hpp source/system.cpp
 )
 
 target_include_directories(
-    hms ${warning_guard}
+    hms_lib ${warning_guard}
     PUBLIC
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source>"
 )
+
+find_package(asio REQUIRED)
+find_package(GTest REQUIRED)
 
 # ---- Declare executable ----
 add_executable(hms_exe source/main.cpp)
@@ -42,7 +45,7 @@ set_target_properties(
     EXPORT_NAME exe
 )
 
-target_link_libraries(hms_exe PRIVATE hms)
+target_link_libraries(hms_exe PRIVATE hms_lib)
 
 include_directories(${PROJECT_BINARY_DIR}/source)
 
