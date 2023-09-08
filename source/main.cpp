@@ -8,7 +8,6 @@
 #include <asio.hpp>
 #include <asio/ts/buffer.hpp>
 #include <asio/ts/internet.hpp>
-#include <entt/entt.hpp>
 
 #include "system.hpp"
 

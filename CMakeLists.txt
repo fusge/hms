@@ -33,7 +33,7 @@ target_include_directories(
 )
 
 find_package(asio REQUIRED)
-find_package(GTest REQUIRED)
+find_package(sdbus-c++ REQUIRED)
 
 # ---- Declare executable ----
 add_executable(hms_exe source/main.cpp)
