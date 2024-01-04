@@ -2,7 +2,7 @@
   "version": 2,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 14,
+    "minor": 28,
     "patch": 0
   },
   "configurePresets": [
@@ -26,7 +26,8 @@
       "hidden": true,
       "inherits": "cmake-pedantic",
       "cacheVariables": {
-        "hms_DEVELOPER_MODE": "ON"
+        "hms_DEVELOPER_MODE": "ON",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
     },
     {
@@ -57,7 +58,7 @@
       "hidden": true,
       "cacheVariables": {
         "CMAKE_CXX_EXTENSIONS": "OFF",
-        "CMAKE_CXX_STANDARD": "20",
+        "CMAKE_CXX_STANDARD": "23",
         "CMAKE_CXX_STANDARD_REQUIRED": "ON"
       }
     },

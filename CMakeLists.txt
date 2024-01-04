@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.28)
 
 include(cmake/prelude.cmake)
 
@@ -14,7 +14,6 @@ include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
 
 configure_file(source/hmsConfig.hpp.in source/hmsConfig.hpp)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 list(APPEND CMAKE_CXX_STANDARD_INCLUDE_DIRECTORIES 
     ${CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES}
 )
@@ -45,7 +44,7 @@ set_target_properties(
     EXPORT_NAME exe
 )
 
-target_link_libraries(hms_exe PRIVATE hms_lib)
+target_link_libraries(hms_exe PRIVATE hms_lib asio::asio SDBusCpp::sdbus-c++)
 
 include_directories(${PROJECT_BINARY_DIR}/source)
 
